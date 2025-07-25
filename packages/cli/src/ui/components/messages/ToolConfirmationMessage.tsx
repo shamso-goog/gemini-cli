@@ -119,7 +119,7 @@ export const ToolConfirmationMessage: React.FC<
         value: ToolConfirmationOutcome.ModifyWithEditor,
       },
       {
-        label: 'No, ask Gemini something else (esc)',
+        label: 'No, suggest changes (esc)',
         value: ToolConfirmationOutcome.Cancel,
       },
     );
@@ -146,7 +146,7 @@ export const ToolConfirmationMessage: React.FC<
         value: ToolConfirmationOutcome.ProceedAlways,
       },
       {
-        label: 'No, ask Gemini something else (esc)',
+        label: 'No, suggest changes (esc)',
         value: ToolConfirmationOutcome.Cancel,
       },
     );
@@ -186,7 +186,7 @@ export const ToolConfirmationMessage: React.FC<
         value: ToolConfirmationOutcome.ProceedAlways,
       },
       {
-        label: 'No, ask Gemini something else (esc)',
+        label: 'No, suggest changes (esc)',
         value: ToolConfirmationOutcome.Cancel,
       },
     );
@@ -230,7 +230,7 @@ export const ToolConfirmationMessage: React.FC<
         value: ToolConfirmationOutcome.ProceedAlwaysServer,
       },
       {
-        label: 'No, ask Gemini something else (esc)',
+        label: 'No, suggest changes (esc)',
         value: ToolConfirmationOutcome.Cancel,
       },
     );
