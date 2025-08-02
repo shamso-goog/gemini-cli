@@ -6,6 +6,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Box, Text, useInput } from 'ink';
+import TextInput from 'ink-text-input';
 import { type HistoryItem } from '../types.js';
 import { Colors } from '../colors.js';
 
@@ -68,11 +69,6 @@ export function HistorySearch({
       return;
     }
 
-    if (key.return) {
-      handleSelect();
-      return;
-    }
-
     if (key.upArrow) {
       setSelectedIndex((prev) => Math.max(0, prev - 1));
       return;
@@ -84,15 +80,6 @@ export function HistorySearch({
       );
       return;
     }
-
-    if (key.backspace || key.delete) {
-      setSearchTerm((prev) => prev.slice(0, -1));
-      return;
-    }
-
-    if (!key.ctrl && !key.meta && input) {
-      setSearchTerm((prev) => prev + input);
-    }
   });
 
   const visibleItems = filteredHistory.slice(
@@ -103,7 +90,12 @@ export function HistorySearch({
   return (
     <Box flexDirection="column" borderStyle="round" paddingX={1} marginY={1}>
       <Box>
-        <Text>(reverse-i-search)`{searchTerm}`: </Text>
+        <Text>(reverse-i-search): </Text>
+        <TextInput
+          value={searchTerm}
+          onChange={setSearchTerm}
+          onSubmit={handleSelect}
+        />
       </Box>
       <Box flexDirection="column" height={MAX_VISIBLE_ITEMS}>
         {visibleItems.map((item) => {
