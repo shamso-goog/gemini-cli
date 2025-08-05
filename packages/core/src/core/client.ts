@@ -368,7 +368,7 @@ export class GeminiClient {
     // Track the original model from the first call to detect model switching
     const initialModel = originalModel || this.config.getModel();
 
-    const compressed = await this.tryCompressChat(prompt_id);
+    const compressed = await this.tryCompressChat(prompt_id, false);
 
     if (compressed) {
       yield { type: GeminiEventType.ChatCompressed, value: compressed };
@@ -677,7 +677,8 @@ export class GeminiClient {
 
   async tryCompressChat(
     prompt_id: string,
-    force: boolean = false,
+    force: boolean,
+    { instruction }: { instruction?: string } = {},
   ): Promise<ChatCompressionInfo | null> {
     const curatedHistory = this.getChat().getHistory(true);
 
@@ -730,7 +731,7 @@ export class GeminiClient {
           text: 'First, reason in your scratchpad. Then, generate the <state_snapshot>.',
         },
         config: {
-          systemInstruction: { text: getCompressionPrompt() },
+          systemInstruction: { text: getCompressionPrompt(instruction) },
         },
       },
       prompt_id,
